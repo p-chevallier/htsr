@@ -1,0 +1,10 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^doc$
+^Meta$
+^cran-comments\.md$
+^README\.md$
+^NEWS\.md$
+^CRAN-SUBMISSION$
+^LICENSE\.md$
+^htsr\.Rproj$
