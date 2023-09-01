@@ -6,9 +6,6 @@
 \usage{
 ds_sensor()
 }
-\arguments{
-\item{fsq}{File name of the Sqlite data base}
-}
 \value{
 a shiny session
 }

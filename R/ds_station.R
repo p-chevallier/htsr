@@ -4,8 +4,6 @@
 #'
 #' @description Shiny application of the \code{\link{d_station}} function
 #'
-#' @param fsq File name of the Sqlite data base
-#'
 #' @return a shiny session
 #'
 ds_station <- function() {
