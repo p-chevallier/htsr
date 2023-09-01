@@ -1,7 +1,7 @@
 ## version 2.1.1 (31 Dec 2023)
 
 ### general
-* 
+* A Git repo has been initialized on github.com
 
 ### new function
 * none
@@ -19,7 +19,9 @@
 ### bug suspected
 * `f_substitute`: It seems that in few cases it doesn't work correctly. But the error trigger isn't clearly identified. If somebody encounters this issue, please document it and contact the author.
 
--------## version 2.1.0 (29 August 2023)
+-------
+
+## version 2.1.0 (29 August 2023)
 
 ### general
 * Several shiny functions have been revisited; see details below.

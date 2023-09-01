@@ -2,6 +2,9 @@
   [![R-CMD-check](https://github.com/p-chevallier/htsr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/p-chevallier/htsr/actions/workflows/R-CMD-check.yaml)
   <!-- badges: end -->
 
+See the most recent release on the github repo:
+https://github.com/p-chevallier/htsr/
+
 # htsr
 
 The goal of 'htsr' is to manage and handle hydrological and meteorological time-series stored
