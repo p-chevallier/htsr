@@ -8,6 +8,6 @@
 #'
 #' @return a shiny session
 #'
-ds_sensor <- function(fsq) {
+ds_sensor <- function() {
   runApp(system.file("extdata/app_sensor", package="htsr"))
 }

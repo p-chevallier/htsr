@@ -4,7 +4,7 @@
 \alias{ds_sensor}
 \title{Shiny app: create, modify or remove a sensor from a data base}
 \usage{
-ds_sensor(fsq)
+ds_sensor()
 }
 \arguments{
 \item{fsq}{File name of the Sqlite data base}

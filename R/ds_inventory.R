@@ -18,6 +18,5 @@
 #'
 #'
 ds_inventory <- function(){
-  #runApp(system.file("extdata/app_invent", package="htsr"),launch.browser=TRUE)
   runApp(system.file("extdata/app_invent", package="htsr"))
 }
