@@ -12,19 +12,13 @@ output:
 ## R CMD check results
 * no ERRORs
 * no WARNINGs
-* 2 NOTEs:
-❯ checking package dependencies ... NOTE
-  Imports includes 21 non-default packages.
-  Importing from so many packages makes the package vulnerable to any of
-  them becoming unavailable.  Move as many as possible to Suggests and
-  use conditionally.
-
+* 1 NOTE:
 ❯ checking compilation flags used ... NOTE
   Compilation used the following non-portable flag(s):
     ‘-Werror=format-security’ ‘-Wformat’ ‘-Wp,-D_FORTIFY_SOURCE=2’
     ‘-Wp,-D_GLIBCXX_ASSERTIONS’ ‘-march=x86-64’
     
-Both notes cannot be fixed in the context of the package. I regret.
+Reply: according to discussions on stackoverflow, it can be ignored.
 
 ### Comment
 * no comment

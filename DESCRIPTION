@@ -10,10 +10,10 @@ Description: Functions for the management and treatment of hydrology and
 License: GPL-2
 Depends: R (>= 3.5.0)
 Imports:
-  DBI, directlabels, dplyr, editData, fs, ggplot2, lubridate, openair, purrr, Rcpp, readr, 
-  readxl, RSQLite, RODBC, shiny, shinyFiles, stringr, terra, tibble, waiter, WriteXLS
+  dplyr, ggplot2, purrr, readr, tibble, lubridate, stringr, fs, Rcpp, 
+  readxl, RSQLite, DBI, shiny, shinyFiles, waiter, WriteXLS
 Suggests:
-    knitr, rmarkdown
+    knitr, rmarkdown, RODBC, openair, editData, terra, directlabels
 Encoding: UTF-8
 RoxygenNote: 7.2.3
 VignetteBuilder: knitr

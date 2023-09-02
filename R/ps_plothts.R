@@ -10,14 +10,14 @@
 
 ps_plothts <- function () {
 
-	library(shiny)
-	library(shinyFiles)
-	library(tibble)
-	library(dplyr)
-	library(lubridate)
-	library(ggplot2)
-	library(editData)
-	library(htsr)
+	requireNamespace("shiny", quietly = TRUE)
+	requireNamespace("shinyFiles", quietly = TRUE)
+	requireNamespace("tibble", quietly = TRUE)
+	requireNamespace("dplyr", quietly = TRUE)
+	requireNamespace("lubridate", quietly = TRUE)
+	requireNamespace("ggplot2", quietly = TRUE)
+	requireNamespace("editData", quietly = TRUE)
+#	library("htsr")
 
 	# Define UI ------
 	ui <- fluidPage(

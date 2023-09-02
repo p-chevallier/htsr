@@ -11,13 +11,13 @@
 #' @return a shiny session
 
 hs_tstep <- function (){
-
-	library(shiny)
-	library(shinyFiles)
-	library(tibble)
-	library(dplyr)
-	library(lubridate)
-	library(waiter)
+#
+	requireNamespace("shiny", quietly = TRUE)
+	requireNamespace("shinyFiles", quietly = TRUE)
+	requireNamespace("tibble", quietly = TRUE)
+	requireNamespace("dplyr", quietly = TRUE)
+	requireNamespace("lubridate", quietly = TRUE)
+	requireNamespace("waiter", quietly = TRUE)
 
 	tstep <- c("monthly", "daily", "12h", "6h", "3h", "2h", "hourly", "30mn",
 						 "10mn", "5mn")

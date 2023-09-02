@@ -9,13 +9,12 @@
 
 ds_station <- function(){
 
-	library(shiny)
-	library(shinyFiles)
-	library(RSQLite)
+	requireNamespace("shiny", quietly = TRUE)
+	requireNamespace("shinyFiles", quietly = TRUE)
+	requireNamespace("RSQLite", quietly = TRUE)
 
 	# fonction exsta
 	exsta <- function (fsq, stationID){
-		library(RSQLite)
 		conn <- RSQLite::dbConnect(RSQLite::SQLite(),fsq)
 		sel <- paste0 ("SELECT * FROM ST  WHERE Id_Station = '", stationID,"'")
 		lsta <- RSQLite::dbGetQuery(conn, sel)

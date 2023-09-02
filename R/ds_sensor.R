@@ -9,11 +9,11 @@
 
 ds_sensor <- function(){
 
-	library(shiny)
-	library(shinyFiles)
-	library(RSQLite)
-	library(DBI)
-	library(htsr)
+	requireNamespace("shiny", quietly = TRUE)
+	requireNamespace("shinyFiles", quietly = TRUE)
+	requireNamespace("RSQLite", quietly = TRUE)
+	requireNamespace("DBI", quietly = TRUE)
+#	requireNamespace(htsr)
 
 	# function confsta
 	confsta <- function (fsq, sta) {

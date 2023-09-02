@@ -14,8 +14,10 @@
 #'
 
 ds_inventory <- function (){
-	library(shiny)
-	library(shinyFiles)
+
+	requireNamespace("shiny", quietly = TRUE)
+	requireNamespace("shinyFiles", quietly = TRUE)
+	requireNamespace("waiter", quietly = TRUE)
 
 	# Define UI
 	ui <- fluidPage(

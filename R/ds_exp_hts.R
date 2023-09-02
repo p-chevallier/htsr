@@ -15,8 +15,14 @@
 # Define UI ------
 ds_exp_hts <- function () {
 
-	library(shiny)
-	library(shinyFiles)
+	requireNamespace("shiny", quietly = TRUE)
+	requireNamespace("shinyFiles", quietly = TRUE)
+	requireNamespace("tibble", quietly = TRUE)
+	requireNamespace("dplyr", quietly = TRUE)
+	requireNamespace("lubridate", quietly = TRUE)
+	requireNamespace("ggplot2", quietly = TRUE)
+#	requireNamespace(htsr)
+
 
 	ui <- fluidPage(
 		theme = NULL,
