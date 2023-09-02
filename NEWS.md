@@ -1,7 +1,9 @@
-## version 2.1.1 (31 Dec 2023)
+## version 2.1.1 (future release)
 
 ### general
 * A Git repo has been initialized on github.com
+
+* Reorganization of the shinyapps in the main R folder
 
 ### new function
 * none
@@ -14,7 +16,7 @@
 
 
 ### bug fixed
-* `ps_plot`: a bug regarding the ggsave(function) is fixed.
+* `ps_plot`: a bug regarding the call to `ggsave`(in `ggplot2` package) is fixed.
 
 ### bug suspected
 * `f_substitute`: It seems that in few cases it doesn't work correctly. But the error trigger isn't clearly identified. If somebody encounters this issue, please document it and contact the author.
