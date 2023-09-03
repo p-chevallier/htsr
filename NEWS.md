@@ -11,14 +11,14 @@
 * none
 
 ### changes
-* 
+* In order to resolve the bug in `ps_plothts`, slight changes have been made also in the codes of `p_line`, `p_bar` and `z_set`.
 
 ### removed functions
 * 
 
 
 ### bug fixed
-* `ps_plot`: a bug regarding the call to `ggsave`(in `ggplot2` package) is fixed.
+* `ps_plot`: a bug regarding the working folders is fixed. But it needed to renounce for instance to entering the uploaded files within the shiny windows. The call to the function must include a parameter as a list of the file names to be plotted.  
 
 ### bug suspected
 * `f_substitute`: It seems that in few cases it doesn't work correctly. But the error trigger isn't clearly identified. If somebody encounters this issue, please document it and contact the author.
