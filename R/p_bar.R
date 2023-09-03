@@ -3,7 +3,7 @@
 #' @author P. Chevallier - Apr 2015 - Aug 2023
 #'
 #' @description Bar plot based on htsr time-series. Prior to the execution of the function,
-#' the parameters must be set by a function generating a "settings.RData" file in the working 
+#' the parameters must be set by a function generating a "settings.RData" file in the working
 #' directory: \code{\link{z_set}} or \code{\link{ps_plothts}}.
 
 #' @details The function deosn't have parameter. For a full description of the settings, see \code{\link{z_set}}
@@ -20,38 +20,39 @@ p_bar <- function(){
 
 	# settings
   fil <- tstab <- Value <- conf <- Legend <- NULL
-  
-	if (!file.exists ("settings.RData")) 
+
+	if (!file.exists (system.file("extdata/settings.RData",package="htsr")))
 		warning("A function creating settings.RData in the working dir must be run before p_line()")
-	
-	load("settings.RData")
-	
+
+  load(file=system.file("extdata/settings.RData",package="htsr"))
+
 	nf <- nrow(fil)
 	pal <- palette.colors(n=nf, palette = palette)
-	
+
 	# Loop for each track
 	for (i in 1:nf) {
 		message("Reading the file ", fil$file.names[i], "\n")
-		load(fil$file.names[i])
+		fff <- fil$file.names[i]
+		load(file=fff)
 		y <- select(tstab, Date, Value)
-		
+
 		if (conf[4])  {
-			y <- filter(y, Date >= as_date(as.numeric(conf[5]))) 
+			y <- filter(y, Date >= as_date(as.numeric(conf[5])))
 			y <- filter(y, Date <= as_date(as.numeric(conf[6])))
 		}
 		if (nrow(y)==0)
 			stop (paste("The time-series", fil$plot.label[i],"has no data.\n"))
-		
+
 		# Normalized values
 		moy <- mean (y$Value, na.rm=TRUE)
 		sigma <- sd (y$Value, na.rm=TRUE)
 		if (conf[3]==TRUE) y$Value <- (y$Value -moy)/sigma
-		
+
 		# Building data.frame
 		y <- mutate (y, Legend = as.factor(fil$plot.label[i]))
 		if (i==1) x <- y else x <- bind_rows (x, y)
 	}
-	
+
   # Trace du graphe
   p <- ggplot (x, aes(x=Date, y= Value, fill=Legend)) +
       geom_bar(stat = "identity", position = "dodge", na.rm = TRUE)
@@ -61,7 +62,7 @@ p_bar <- function(){
   	p = p + stat_smooth(method=lm, se=FALSE)
 
   if (conf[11]) p = p + facet_grid (Legend ~ ., scales = "free_y")
-  
+
   # Ecriture des labels
   p <- p + theme(panel.background=element_rect(fill="white", colour="black"),
                  panel.grid.major=element_line(colour="black"),

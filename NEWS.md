@@ -5,6 +5,8 @@
 
 * Reorganization of the shinyapps in the main R folder
 
+* Dependency issues resolved and simplified
+
 ### new function
 * none
 
