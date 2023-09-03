@@ -34,6 +34,7 @@ ps_plothts <- function () {
 			editData::editableDTUI("table2"),
 			br(),
 			actionButton("savefil", "Save file settings", class = "btn-warning"),
+			textOutput ("filsaved"),
 			hr()
 		),
 
@@ -151,32 +152,43 @@ ps_plothts <- function () {
 
 			observeEvent(input$savefil,{
 				req(input$file)
+				ff <- fifi(inputfiles)
+				wd <- dirname(ff[1])
+
 				fil <- df()
-				save(fil, file = "fil.RData")
+				save(fil, file = paste0(wd,"/fil.RData"))
 			})
+			output$filsaved <- renderText({paste0(wd,"/fil.RData, saved.")})
 		})
 
 		observeEvent(input$saveconf, {
 			req(input$file)
+			ff <- fifi(input$files)
+			wd <- dirname(ff[1])
+
 			conf <- reactive(c(input$title,  input$yaxis,
 												 input$normval, input$fixtime,
 												 input$daterange[1], input$daterange[2],
 												 input$fixy, input$ymin, input$ymax,
 												 input$trend, input$facet, input$plot.point))
 			conf <- conf()
-			save(conf, file = "conf.RData")
+			save(conf, file = paste0(wd,"/conf.RData"))
 		})
 
 
 		observeEvent(input$plot, {
 			req(input$file, input$saveconf, input$savefil)
-			load(file ="fil.RData")
-			load(file="conf.RData")
+			ff <- fifi(input$files)
+			wd <- dirname(ff[1])
+
+			load(file =paste0(wd,"/fil.RData"))
+			load(file=paste0(wd,"/conf.RData"))
 			palette <- input$pal
 			tz <- "UTC"
-			save(file="settings.RData", fil, conf, palette, tz)
+			save(file=paste0(wd,"/settings.RData"), fil, conf, palette, tz)
+
 			output$plotresult <- renderPlot({
-				load(file = "settings.RData")
+				load(file = paste0(wd,"/settings.RData"))
 				if(input$linbar == "line"){
 					p_line()
 				} else {
@@ -185,8 +197,7 @@ ps_plothts <- function () {
 			})
 			observeEvent(input$confirmsave,{
 				req(input$plot, input$file)
-				tab <- parseFilePaths(volumes, input$file)
-				ff <- tab$datapath
+				ff <- fifi(input$files)
 				wd <- dirname(ff[1])
 
 				filename <- paste0(wd, "/", input$plotname)
