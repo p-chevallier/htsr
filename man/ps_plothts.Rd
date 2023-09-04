@@ -4,10 +4,7 @@
 \alias{ps_plothts}
 \title{Shiny app: plot hts files}
 \usage{
-ps_plothts(files)
-}
-\arguments{
-\item{files}{list of hts file names to be plotted}
+ps_plothts()
 }
 \description{
 Shiny application of the \code{\link{p_line}} and \code{\link{p_bar}}
@@ -17,5 +14,5 @@ functions, associated with \code{\link{z_set}}
 When launched, a shiny window is open. Follow the instructions and steps.
 }
 \author{
-P. Chevallier - May 2020 - Aug 2023
+P. Chevallier - May 2020 - Sep 2023
 }

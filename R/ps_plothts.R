@@ -1,28 +1,59 @@
 #' @title Shiny app: plot hts files
 #'
-#' @author P. Chevallier - May 2020 - Aug 2023
+#' @author P. Chevallier - May 2020 - Sep 2023
 #'
 #' @description Shiny application of the \code{\link{p_line}} and \code{\link{p_bar}}
 #' functions, associated with \code{\link{z_set}}
-#'
-#' @param files list of hts file names to be plotted
 #'
 #' @details When launched, a shiny window is open. Follow the instructions and steps.
 #'
 #'
 #'
-ps_plothts <- function(files){
+ps_plothts <- function(){
 
 	requireNamespace("shiny", quietly = TRUE)
-	# requireNamespace("shinyFiles", quietly = TRUE)
+	requireNamespace("shinyFiles", quietly = TRUE)
 	requireNamespace("tibble", quietly = TRUE)
 	requireNamespace("dplyr", quietly = TRUE)
 	requireNamespace("lubridate", quietly = TRUE)
 	requireNamespace("editData", quietly = TRUE)
 
+	selectfilesUI <- function(id) {
+		tagList(
+			shinyFilesButton(NS(id,"file"), "File select", "Please select a file", multiple = TRUE,
+											 viewtype = "detail", class="btn btn-primary"),
+			tags$p(),
+			# tags$h4("The output of a file selection"),
+			verbatimTextOutput(NS(id,"filepaths"))
+		)
+	}
+
+	selectfilesServer <- function(id) {
+		moduleServer(id, function(input, output, session) {
+			volumes <- c(Home = fs::path_home(), "R Installation" = R.home(), getVolumes()())
+			shinyFileChoose(input, "file", roots = volumes, session = session,
+											filetypes="hts")
+
+			## print to browser
+			output$filepaths <- renderPrint({
+				if (is.integer(input$file)) {
+					cat("No files have been selected")
+				} else {
+					parseFilePaths(volumes, input$file)
+					tab <- parseFilePaths(volumes, input$file)
+					# save (file = "~/Bureau/tab.RData", tab)
+					save(tab, file=system.file("extdata/tab.RData",package="htsr"))
+					cat(nrow(tab)," files selected")
+				}
+			})
+		})
+	}
+
 ui <- fluidPage(
 
 	titlePanel("Files ploting"),
+
+	selectfilesUI("sf"),
 
 	fluidRow(
 		verbatimTextOutput("text1"),
@@ -117,6 +148,11 @@ server <- function(input, output, session) {
 		options(shiny.maxRequestSize = 1000 * 1024 ^ 2)
 		options(warn=-1)
 		conf<-fil<-palette<-NULL
+
+		selectfilesServer("sf")
+		load(file=system.file("extdata/tab.RData",package="htsr"))
+		files <- tab$datapath
+
 		nf <- length(files)
 		wd <- dirname (files[1])
 
