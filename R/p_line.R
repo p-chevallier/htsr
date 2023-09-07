@@ -23,16 +23,19 @@ p_line <- function(){
   fil <- tstab <- Value <- conf <- Legend <- NULL
 
 	if (!file.exists (system.file("extdata/settings.RData",package="htsr")))
-		warning("A function creating settings.RData in the working dir must be run before p_line()")
+		warning("A function creating settings.RData in the data dir must be run before p_line()")
+
+  options(warn=-1)
 
 	load(file=system.file("extdata/settings.RData",package="htsr"))
 
 	nf <- nrow(fil)
 	pal <- palette.colors(n=nf, palette = palette)
 
+
 # Loop for each track
   for (i in 1:nf) {
-    message("Reading the file ", fil$file.names[i], "\n")
+    message("\nReading the file ", fil$file.names[i], "\n")
   	fff <- fil$file.names[i]
   	load(file=fff)
     y <- select(tstab, Date, Value)
@@ -91,6 +94,8 @@ p_line <- function(){
   p <- p+ theme(legend.position="bottom") +
             theme(legend.text=element_text(size =16))
   p <- p+ theme(legend.title=element_text(size =16, face="bold"))
+
+  options(warn=0)
 
   return(p)
 }
