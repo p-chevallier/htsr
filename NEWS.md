@@ -12,7 +12,8 @@
 * The function `d_convert_weewx` is modified, allowing to update the htsr data base with the most recent records of the weewx data base.
 
 ### bug fixed
-* `ps_plot`: a bug regarding the working folders and the file upload is fixed. 
+* `ps_plot`: a bug regarding the working folders and the file upload is fixed.
+* `ds_station`: correction of the inversion between latitude and longitude.
 
 ### bug suspected
 * `f_substitute`: It seems that in few cases it doesn't work correctly. But the error trigger isn't clearly identified. If somebody encounters this issue, please document it and contact the author.
