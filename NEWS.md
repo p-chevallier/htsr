@@ -7,15 +7,9 @@
 
 * Dependency issues resolved and simplified
 
-### new function
-* none
-
 ### changes
 * Accompanying the fixed bug in `ps_plothts`, slight changes have been made also in the codes of `p_line`, `p_bar` and `z_set`.
-
-### removed functions
-* 
-
+* The function `d_convert_weewx` is modified, allowing to update the htsr data base with the most recent records of the weewx data base.
 
 ### bug fixed
 * `ps_plot`: a bug regarding the working folders and the file upload is fixed. 
