@@ -9,11 +9,11 @@
 #' @param update (default = TRUE)
 #' @param sta Station id (default = NA)
 #' @param name_st Station name (default = NA)
-#' 
+#'
 #' @details If update is TRUE, sta and name_st are unnecessary. I update is FALSE and
 #' fsq is NA, fsq is named "weewx.sqlite".
-#'  
-#'   
+#'
+#'
 #'
 #' @examples \dontrun{
 #'
@@ -152,12 +152,15 @@ d_convert_weewx <- function(db.weewx, fsq = NA, update=TRUE, sta = NA, name_st =
 
   # Deconnexion base weewx
   RSQLite::dbDisconnect(conn)
-  
-  if (update) x <- filter(x, date > dmx)
-  else {
+
+  nrx <- nrow (x)
+  if (update) {
+  	x <- filter(x, date > dmx)
+  	nrx <- nrow (x)
+  } else {
 	  # Creation station
 	  d_station(fsq, op = "C", sta = sta, name_st = name_st, ty_st="M", bku = FALSE)
-	
+
 	  # Creation des tables et des capteurs
 	  l <- as.vector(c("IPA", "ITAi", "ITAo", "IHRi", "IHRo", "IWV", "IWD", "IWG", "IWGD",
 	     "JTAn","JTAx","JTAi","JTAo","JWD","JWV","JWG"))
@@ -197,8 +200,8 @@ d_convert_weewx <- function(db.weewx, fsq = NA, update=TRUE, sta = NA, name_st =
 
   #Deconnexion base sqlite
   RSQLite::dbDisconnect(conn)
-  if (update) message("\nBase ", fsq, " completed")
-  else message("\nBase ", fsq, " created")
+  if (update) message("\nBase ", fsq, " completed with ", nrx, " added records.")
+  else message("\nBase ", fsq, " created with ", nrx, " records.")
 
 }
 
