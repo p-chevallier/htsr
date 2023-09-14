@@ -90,9 +90,9 @@ p_line <- function(){
   # Redimensionner l'ordonnee
   if(conf[7]==TRUE) p <- p + ylim(as.numeric(conf[8]),as.numeric(conf[9]))
 
-  # Ecriture de l'ordonnee
-  p <- p+ theme(legend.position="bottom") +
-            theme(legend.text=element_text(size =16))
+  # Ecriture des legendes
+  if (conf[11]) p <- p+ theme(legend.position="none")
+  else p <- p+ theme(legend.position="bottom") + theme(legend.text=element_text(size =16))
   p <- p+ theme(legend.title=element_text(size =16, face="bold"))
 
   options(warn=0)

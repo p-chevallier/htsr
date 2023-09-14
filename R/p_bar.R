@@ -62,7 +62,9 @@ p_bar <- function(){
   if (conf[10]==TRUE)
   	p = p + stat_smooth(method=lm, se=FALSE)
 
-  if (conf[11]) p = p + facet_grid (Legend ~ ., scales = "free_y")
+  if (conf[11]) p = p + facet_grid (Legend ~ ., scales = "free_y") +
+  	theme(strip.text = element_text(size=rel(2)),
+  				strip.background = element_rect(colour="black", size =0.5))
 
   # Ecriture des labels
   p <- p + theme(panel.background=element_rect(fill="white", colour="black"),
@@ -80,9 +82,9 @@ p_bar <- function(){
   # Redimensionner l'ordonnee
   if(conf[7]==TRUE) p <- p + ylim(as.numeric(conf[8]),as.numeric(conf[9]))
 
-  # Ecriture l'ordonnee
-  p <- p+ theme(legend.position="bottom") +
-            theme(legend.text=element_text(size =16))
+  # Ecriture des legendes
+  if (conf[11]) p <- p+ theme(legend.position="none")
+  else p <- p+ theme(legend.position="bottom") + theme(legend.text=element_text(size =16))
   p <- p+ theme(legend.title=element_text(size =16, face="bold"))
 
   options(warn=0)
