@@ -23,7 +23,6 @@ ps_plothts <- function(){
 			shinyFilesButton(NS(id,"file"), "File select", "Please select a file", multiple = TRUE,
 											 viewtype = "detail", class="btn btn-primary"),
 			tags$p(),
-			# tags$h4("The output of a file selection"),
 			verbatimTextOutput(NS(id,"filepaths"))
 		)
 	}
@@ -41,9 +40,17 @@ ps_plothts <- function(){
 				} else {
 					parseFilePaths(volumes, input$file)
 					tab <- parseFilePaths(volumes, input$file)
-					# save (file = "~/Bureau/tab.RData", tab)
-					save(tab, file=system.file("extdata/tab.RData",package="htsr"))
-					cat(nrow(tab)," files selected")
+
+					files <- tab$datapath
+					nf <- length(files)
+					plot.label <- vector(mode="character", length = nf)
+					for (i in 1:nf) {plot.label[i] <- paste ("label ", i)}
+
+					fil <- tibble(file.names=files, plot.label, line.type = 1, line.width = 0.2,
+												point.shape = 20, point.size = 2)
+
+					save(fil, file=system.file("extdata/fil.RData",package="htsr"))
+					cat(nf," files selected")
 				}
 			})
 		})
@@ -150,11 +157,11 @@ server <- function(input, output, session) {
 		conf<-fil<-palette<-NULL
 
 		selectfilesServer("sf")
-		load(file=system.file("extdata/tab.RData",package="htsr"))
-		files <- tab$datapath
+		# load(file=system.file("extdata/tab.RData",package="htsr"))
+		# files <- tab$datapath
 
-		nf <- length(files)
-		wd <- dirname (files[1])
+		# nf <- length(files)
+		# wd <- dirname (files[1])
 
 		# output$text1 <- renderPrint({
 		# 	cat('It' recommended to select files from the same folder (8 max). and .\n')
@@ -166,11 +173,7 @@ server <- function(input, output, session) {
 
 		observeEvent(input$setfil, {
 
-			plot.label <- vector(mode="character", length = nf)
-			for (i in 1:nf) {plot.label[i] <- paste ("label ", i)}
-
-			fil <- tibble(file.names=files, plot.label, line.type = 1, line.width = 0.2,
-										point.shape = 20, point.size = 2)
+			load(file=system.file("extdata/fil.RData",package="htsr"))
 
 			myfil <- fil
 			df=callModule(editData::editableDT,"table2",data=reactive(myfil))
