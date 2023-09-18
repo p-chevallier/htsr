@@ -1,14 +1,18 @@
 #' @title Shiny app: convert f file with fixed time-step
 #'
-#' @author P. Chevallier - Dec 2020 - Aug 2023
+#' @author P. Chevallier - Dec 2020 - Sep 2023
 #'
 #' @description Shiny application of the  functions \code{\link{h_timestep}} and \code{\link{h_month}}
 #'
 #' @details
-#' The output files are written in the specified working directory.
+#' The output files are written in same folder as the starting hts file.
 #'
+#' In the case of the monthly time step, the modes max-av an max-max mean that in the first case the daily max
+#' is computed and the monthly average of the daily max, in the second case, the monthly max of the daily max is
+#' given (idem for the min values)
 #'
-#' @return a shiny session
+#' @return a shiny session and hts file at the requested timestep with a suffix giving the timestep in minutes, i.e.
+#' 1440 for the daily timestep, or M for the monthly timestep.
 
 hs_tstep <- function (){
 #
@@ -22,6 +26,7 @@ hs_tstep <- function (){
 	tstep <- c("monthly", "daily", "12h", "6h", "3h", "2h", "hourly", "30mn",
 						 "10mn", "5mn")
 	lmode <- c("average", "max", "min", "sum")
+	lmodem <- c("average", "max-av", "max-max", "min-av", "min-min", "sum")
 
 	# Define UI
 	ui <- fluidPage(
@@ -38,18 +43,30 @@ hs_tstep <- function (){
 
 		fluidRow(
 			column(width = 4,
-						 selectInput("ts", "Time-step", tstep, selected = "daily"),
-						 numericInput("shift", "If daily, shift (hours)",0,0,23,1)
+				selectInput("ts", "Time-step", tstep, selected = "daily"),
+				conditionalPanel(
+					 	condition = "input.ts == 'daily'",
+					 	numericInput("shift", "Time shift (hours)",0,0,23,1)
+				)
 			),
 			column(width = 4,
-						 selectInput("mode", "Mode", lmode, selected = "average")
+				conditionalPanel(
+					condition = "input.ts == 'monthly'",
+					selectInput("mode", "Mode", lmodem, selected = "average")
+				),
+				conditionalPanel(
+					condition = "input.ts != 'monthly'",
+					selectInput("mode", "Mode", lmode, selected = "average")
+				),
 			),
-			column(width = 4,
-						 p(strong("If monthly")),
-						 checkboxInput("climedit", "climatogy file"),
-						 checkboxInput("rmna", "remove NA"),
-						 checkboxInput("gapfill", "gapfilling"),
-						 checkboxInput("hts_year", "extract year stat")
+			conditionalPanel(
+				condition = "input.ts == 'monthly'",
+					column(width = 4,
+							 checkboxInput("climedit", "climatogy file"),
+							 checkboxInput("rmna", "remove NA"),
+							 checkboxInput("gapfill", "gapfilling"),
+							 checkboxInput("hts_year", "extract year stat")
+				)
 			)
 		),
 
@@ -63,7 +80,6 @@ hs_tstep <- function (){
 			hr(),
 			actionButton("close", "Done", class = "btn btn-danger")
 		)
-
 	)
 
 	# Define server
@@ -107,18 +123,23 @@ hs_tstep <- function (){
 			if(input$mode == "max") op <- "Mx"
 			shift <- as.numeric(input$shift)
 
-			# Journalier et infra-journalier
+			# Mensuel
 			if (mn) {
 				waiter <- waiter::Waiter$new()
 				waiter$show()
 				on.exit(waiter$hide())
 				tst <- 1440
+				if(input$mode == "max-av") {op <- "Mx" ; op1 <- "M"}
+				if(input$mode == "max-max") {op <- "Mx" ; op1 <- "Mx"}
+				if(input$mode == "min-av") {op <- "Mn" ; op1 <- "M"}
+				if(input$mode == "min-min") {op <- "Mn" ; op1 <- "Mn"}
 				f <- h_timestep(file=ff, tst=1440, op = op, shift = 0)
-				f1 <- h_month(file = f, op = op, ba = NA, rmna = input$rmna, climedit = input$climedit,
+				f1 <- h_month(file = f, op = op1, ba = NA, rmna = input$rmna, climedit = input$climedit,
 											gapfill = input$gapfill, hts_year = input$hts_year)
 				output$MESS1 <- renderText({paste("File written:", f1[1],
 																					" with eventual accompanying files")})
 			} else {
+				# Journalier et infra-journalier
 				waiter <- waiter::Waiter$new()
 				waiter$show()
 				on.exit(waiter$hide())
