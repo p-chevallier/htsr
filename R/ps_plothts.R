@@ -17,6 +17,7 @@ ps_plothts <- function(){
 	requireNamespace("dplyr", quietly = TRUE)
 	requireNamespace("lubridate", quietly = TRUE)
 	requireNamespace("editData", quietly = TRUE)
+	requireNamespace("ggplot2", quietly = TRUE)
 
 	selectfilesUI <- function(id) {
 		tagList(
@@ -134,7 +135,7 @@ ui <- fluidPage(
 		conditionalPanel(
 			condition = "input.saveplot",
 			column(5,
-						 textInput("plotname","name+ext (pdf, png, jpg)", "resulting-plot.png")
+						 textInput("plotname","name + ext (pdf,png,jpg)", "resulting_plot.png")
 			),
 			column(2,
 						 numericInput("plotwidth", "Width (cm)", 8)
@@ -157,19 +158,6 @@ server <- function(input, output, session) {
 		conf<-fil<-palette<-NULL
 
 		selectfilesServer("sf")
-		# load(file=system.file("extdata/tab.RData",package="htsr"))
-		# files <- tab$datapath
-
-		# nf <- length(files)
-		# wd <- dirname (files[1])
-
-		# output$text1 <- renderPrint({
-		# 	cat('It' recommended to select files from the same folder (8 max). and .\n')
-		# 	cat('Press "File settings for modifying (or not) the file parameters in the table, then press "Save file settings".\n')
-		# 	cat('And/or modify the general plotting parameters, then press "Save plot settings".\n')
-		# 	cat('Press "Plot at any time after saving file and/or plotting parameters.\n')
-		# 	cat('The plot can be saved in png, jpg or pdf in the folder of the files.')
-		# })
 
 		observeEvent(input$setfil, {
 
@@ -214,13 +202,17 @@ server <- function(input, output, session) {
 					p_bar()
 				}
 			})
-			observeEvent(input$confirmsave,{
-				req(input$plot)
-
-				ggsave(filename= paste0(wd,"/",input$plotname), width=input$plotwidth,
-							 height=input$plotheight, dpi=300)
-			})
 		})
+
+		observeEvent(input$confirmsave,{
+			req(input$plot)
+			load(file=system.file("extdata/fil.RData",package="htsr"))
+			wd <- dirname(fil$file.names[1])
+
+			ggsave(filename= paste0(wd,"/",input$plotname), width=as.numeric(input$plotwidth),
+						 height=as.numeric(input$plotheight), dpi=300)
+		})
+
 
 		observeEvent(input$close, {stopApp()})
 	}
