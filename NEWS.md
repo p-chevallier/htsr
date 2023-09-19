@@ -1,3 +1,21 @@
+## version 2.1.2 (next version)
+
+### general
+* 
+
+### new function
+* 
+
+### changes
+* 
+
+### bug fixed
+* 
+
+### bug suspected
+* `f_substitute`: It seems that in few cases it doesn't work correctly. But the error trigger isn't clearly identified. If somebody encounters this issue, please document it and contact the author.
+
+-------
 ## version 2.1.1 (19 September 2023)
 
 ### general
