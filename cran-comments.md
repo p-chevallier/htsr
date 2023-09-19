@@ -6,8 +6,9 @@ output:
   pdf_document: default
 ---
 ## Test environments
-* local: Manjaro Linux "Uranos 23.0.0", R "4.3.1", Kernel "6.5.0-1"
+* local: Manjaro Linux "Uranos 23.0.2", R "4.3.1", Kernel "6.5.1-1"
 * win: tested with win-builder.r-project.org using the r-devel version
+* github: R-CMD-check]
 
 ## R CMD check results
 * no ERRORs

@@ -1,4 +1,4 @@
-## version 2.1.1 (future release)
+## version 2.1.1 (19 September 2023)
 
 ### general
 * A Git repo has been initialized on github.com
@@ -10,9 +10,10 @@
 ### changes
 * Accompanying the fixed bug in `ps_plothts`, slight changes have been made also in the codes of `p_line`, `p_bar` and `z_set`.
 * The function `d_convert_weewx` is modified, allowing to update the htsr data base with the most recent records of the weewx data base.
+* Changes in `hs_tstep` and in `h_month` allowing to compute min and max values.
 
 ### bug fixed
-* `ps_plot`: a bug regarding the working folders and the file upload is fixed.
+* `ps_plot`: several bugs fixed.
 * `ds_station`: correction of the inversion between latitude and longitude.
 
 ### bug suspected
