@@ -1,13 +1,13 @@
 ## version 2.1.2 (next version)
 
 ### general
-* 
+* The functions `d_exp_hts`, `d_inventory` are included in their shiny equivalent and not anymore displayed as autonomous.
 
 ### new function
 * 
 
 ### changes
-* 
+* `d_inventory`: The inventory can be stored in xlsx ou csv files.
 
 ### bug fixed
 * 

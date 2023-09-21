@@ -1,15 +1,21 @@
-#' @title Shiny app: export hts files from a sqlite data base
+#' @title Extraction of a time-series from htsr data base
 #'
-#' @author P. Chevallier - Apr 2020 - Sep 2023
+#' @author P. Chevallier - Oct 2017 - Sep 2023
 #'
-#' @description Shiny application of the \code{\link{d_exp_hts}} function
+#' @description The function display a web page allowing to extract a time-series in the "hts" format.
 #'
 #' @details
 #'  Complete the requested information in the left panel, then press the submit button in
 #' order to extract the file. If you want to display the plot of the extracted file,
 #' choose "line" or "bar" and press the plot button.
 #'
-#' @return a shiny session
+#'  When the subfunction \code{\link{d_exp_hts(fsq, sta,sen,rtime=FALSE,dstart=NA,dend=NA, rplot=FALSE)}}
+#'  is used solely it returns a tibble tstab with 4 columns Date, Value, Station, Sensor.
+#'  In this last subfunction fsq is the sqlite data base; sta, the station id, sen, the sensor id; rtime, dstart and
+#'  dend define a time interval; rplot, the resulted plot.
+#'
+#' @return The function returns a file (nomfic) with the following name: <sensor.id>_<station.id>.hts
+#'
 
 
 # Define UI ------
@@ -21,8 +27,6 @@ ds_exp_hts <- function () {
 	requireNamespace("dplyr", quietly = TRUE)
 	requireNamespace("lubridate", quietly = TRUE)
 	requireNamespace("ggplot2", quietly = TRUE)
-#	requireNamespace(htsr)
-
 
 	ui <- fluidPage(
 		theme = NULL,
@@ -148,3 +152,84 @@ ds_exp_hts <- function () {
 	# Run the app
 	shinyApp(ui = ui, server = server)
 }
+
+d_exp_hts <- function(fsq, sta,sen,rtime=FALSE,dstart=NA,dend=NA, rplot=FALSE){
+
+	# fonction u_statnom
+	u_statnom <- function(fsq,sta){
+		conn <- dbConnect(SQLite(),fsq)
+		sta <- paste("'",sta,"'",sep="")
+		selection <- paste ("SELECT * FROM ST WHERE Id_station =",sta)
+		xt <- dbGetQuery(conn, selection)
+		nom <- xt$Nom[1]
+		dbDisconnect(conn)
+		return(nom)
+	}
+
+	# fonction u_stacapt
+	u_stacapt <- function(fsq,table,sta,sen){
+		Valeur <- NULL
+		conn <- dbConnect(SQLite(),fsq)
+		table1 <- paste("'",table,"'",sep="")
+		sta1 <- paste("'",sta,"'",sep="")
+		sen1 <- paste("'",sen,"'",sep="")
+		selection <- paste ("SELECT * FROM", table1, " WHERE Id_Station =",sta1,
+												" AND Capteur =",sen1)
+		x <- dbGetQuery(conn, selection)
+		xt <- tibble::as_tibble(x)
+		dbDisconnect(conn)
+		yt <- dplyr::select(xt,Date,Valeur)
+		yt <- dplyr::arrange(yt,Date)
+		return(yt)
+	}
+
+	# corps de fonction
+	# suppressWarnings()
+
+	# initialisation
+	Sys.setenv(TZ='UTC')
+	conn <- dbConnect(SQLite(),fsq)
+	sta1 <- paste0("'",sta,"'")
+	sen1 <- paste0("'",sen,"'")
+	sel <- paste ("SELECT * FROM SS WHERE Id_Station =",sta1,
+								" AND Capteur =",sen1)
+	t <- dbGetQuery(conn,sel)
+	table <- as.character(t$Tabl)
+	dbDisconnect(conn)
+	#  if(table=="PR") op <-"S" else op <- "Mo"
+
+	# appel u_stacapt
+	z <- u_stacapt(fsq, table, sta, sen)
+	colnames(z) <- c("Date", "Value")
+	z$Date <- as_datetime(z$Date)
+
+	# preparation pour rafinage
+	dstart <- as_datetime(dstart)
+	dend <- as_datetime(dend)
+	date_start <- as_datetime(min(z$Date))
+	date_end <- as_datetime(max(z$Date))
+
+	if(rtime) {
+		if(is.na(dstart)) dstart <-date_start
+		if(is.na(dend)) dend <- date_end
+		# z <- window (z, start = dstart, end = dend)
+		z <- filter(z, Date > dstart)
+		z <- filter(z, Date <= dend)
+	}
+
+	nomfic <- paste (dirname(fsq),"/",sen,"_",sta,".hts",sep="")
+	tstab <- mutate(z, Station = as.factor(sta), Sensor = as.factor(sen))
+	save(tstab, file=nomfic)
+
+	# plot graphe
+	if(rplot){
+		htsr::z_set(file.names = nomfic, plot.label = sen, title = sta)
+		if (table=="PR") p <- htsr::p_bar() else p <- htsr::p_line()
+		show(p)
+	}
+
+	# sortie
+	write(file="",paste("File",nomfic,"extracted !"))
+	return (tstab)
+}
+
