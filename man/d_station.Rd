@@ -92,7 +92,7 @@ If op is R, all data and sensors of the station are removed.
 }
 \seealso{
 \itemize{
- \item \code{\link{d_inventory}} or \code{\link{ds_inventory}} for exploring the
+ \item \code{\link{ds_inventory}} for exploring the
  data base content;
  \item \code{\link{ds_exp_hts}} for extracting a time-series;
  \item \code{\link{d_table}} for creating a data base and/or creating/removing

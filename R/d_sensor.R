@@ -16,7 +16,7 @@
 #'
 #' @seealso
 #' \itemize{
-#'  \item \code{\link{d_inventory}} or \code{\link{ds_inventory}} to explore the
+#'  \item \code{\link{ds_inventory}} to explore the
 #'  data base content;
 #'  \item \code{\link{ds_exp_hts}} to extract a time-series;
 #'  \item \code{\link{d_create}, \link{d_table}} to create a data base and/or create/remove
@@ -233,7 +233,7 @@ d_sensor <- function(fsq, op = "C", sta, sen, table,
     selection <- paste ("DELETE FROM SS WHERE Id_station = ", sta1, "AND Capteur = ", sen1)
     rs <- dbSendQuery(conn, selection)
     dbClearResult(rs)
-    
+
     message("\nSensor ", sen, " for station ", sta, " and table ", table, " is removed with all its data.")
   }
   dbDisconnect(conn)

@@ -18,7 +18,7 @@
 #'
 #' @seealso
 #' \itemize{
-#'  \item \code{\link{d_inventory}} or \code{\link{ds_inventory}} for exploring the
+#'  \item \code{\link{ds_inventory}} for exploring the
 #'  data base content;
 #'  \item \code{\link{ds_exp_hts}} for extracting a time-series;
 #'  \item \code{\link{d_table}} for creating a data base and/or creating/removing
@@ -234,7 +234,7 @@ d_station <- function(fsq, op = "C", sta, ty_st = NA, name_st=NA,
     selection <- paste ("DELETE FROM ST WHERE Id_station = ", sta1)
     rs <- dbSendQuery(conn, selection)
     dbClearResult(rs)
-    
+
     message("\nStation ",name_st," with id ", sta, " is removed with all its data.")
     dbDisconnect(conn)
   }

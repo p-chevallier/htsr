@@ -78,7 +78,7 @@ station are removed.
 }
 \seealso{
 \itemize{
- \item \code{\link{d_inventory}} or \code{\link{ds_inventory}} to explore the
+ \item \code{\link{ds_inventory}} to explore the
  data base content;
  \item \code{\link{ds_exp_hts}} to extract a time-series;
  \item \code{\link{d_create}, \link{d_table}} to create a data base and/or create/remove

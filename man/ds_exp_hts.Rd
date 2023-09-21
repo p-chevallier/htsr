@@ -17,7 +17,7 @@ Complete the requested information in the left panel, then press the submit butt
 order to extract the file. If you want to display the plot of the extracted file,
 choose "line" or "bar" and press the plot button.
 
- When the subfunction \code{\link{d_exp_hts(fsq, sta,sen,rtime=FALSE,dstart=NA,dend=NA, rplot=FALSE)}}
+ When the subfunction "d_exp_hts(fsq, sta,sen,rtime=FALSE,dstart=NA,dend=NA, rplot=FALSE)"
  is used solely it returns a tibble tstab with 4 columns Date, Value, Station, Sensor.
  In this last subfunction fsq is the sqlite data base; sta, the station id, sen, the sensor id; rtime, dstart and
  dend define a time interval; rplot, the resulted plot.
