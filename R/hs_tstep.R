@@ -129,6 +129,7 @@ hs_tstep <- function (){
 				waiter$show()
 				on.exit(waiter$hide())
 				tst <- 1440
+				op1 <- op
 				if(input$mode == "max-av") {op <- "Mx" ; op1 <- "M"}
 				if(input$mode == "max-max") {op <- "Mx" ; op1 <- "Mx"}
 				if(input$mode == "min-av") {op <- "Mn" ; op1 <- "M"}
