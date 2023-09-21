@@ -1,16 +1,20 @@
 ## version 2.1.2 (next version)
 
 ### general
-* The functions `d_exp_hts`, `d_inventory` are included in their shiny equivalent and not anymore displayed as autonomous.
+* The functions `d_exp_hts`, `d_inventory`, `h_tstep`, `h_month` are included in their shiny equivalent and not anymore displayed as autonomous.
 
 ### new function
 * 
 
 ### changes
-* `d_inventory`: The inventory can be stored in xlsx ou csv files.
+* `ds_inventory`: The inventory can be stored in xlsx ou csv files.
+* `hs_tstep`: offers new options, which was previously included in `h_month`.
 
 ### bug fixed
 * 
+
+### removed functions
+* `h_etp`, which duplicated `w_etp`
 
 ### bug suspected
 * `f_substitute`: It seems that in few cases it doesn't work correctly. But the error trigger isn't clearly identified. If somebody encounters this issue, please document it and contact the author.
