@@ -40,5 +40,5 @@ respectively import the discharges within the data base. The function u_exp_disc
 included in \code{\link{p_discalib}} is used for loading the calibration curves.
 }
 \author{
-P. Chevallier - Dec 2020
+P. Chevallier - Dec 2020 - Sep 2023
 }

@@ -1,7 +1,8 @@
 ## version 2.1.2 (next version)
 
 ### general
-* The functions `d_exp_hts`, `d_inventory`, `h_tstep`, `h_month` are included in their shiny equivalent and not anymore displayed as autonomous.
+* The subfunctions `d_exp_hts`, `d_inventory`, `h_tstep`, `h_month` are included in their shiny equivalent and not anymore displayed as autonomous.
+* The subfunctions `p_line`, `p_bar` and `z_set` are included in the calling functions and not anymore displayed as autonomous.
 
 ### new function
 * 
@@ -9,6 +10,7 @@
 ### changes
 * `ds_inventory`: The inventory can be stored in xlsx ou csv files.
 * `hs_tstep`: offers new options, which was previously included in `h_month`.
+* Changes were made in `ds_exp_hts`, `ps_plothts`, `d_wind` and `h_wl_di` in order to include the subfunctions `p_line`, `p_bar` and `z_set`. 
 
 ### bug fixed
 * 
