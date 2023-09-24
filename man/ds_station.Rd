@@ -2,16 +2,22 @@
 % Please edit documentation in R/ds_station.R
 \name{ds_station}
 \alias{ds_station}
-\title{Shiny app: create, modify or remove a station from a data base}
+\title{Create, Modify or Remove a station}
 \usage{
 ds_station()
 }
 \value{
-a shiny session
+Station created, modified ou removed from the data base
 }
 \description{
-Shiny application of the \code{\link{d_station}} function
+Create, Modify or Remove a station.
+}
+\details{
+If operation is Create, the fields Id_Station, Type_Station and
+Name (name_st) are compulsory. The field Name can be modified afterwards.
+
+
 }
 \author{
-P. Chevallier - Apr 2020 - Aug 2023
+P. Chevallier - Jan 2018 - Sep 2023
 }

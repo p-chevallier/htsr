@@ -1,7 +1,7 @@
 ## version 2.1.2 (development version)
 
 ### general
-* The subfunctions `d_exp_hts`, `d_inventory`, `d_sensor`, `h_tstep`, `h_month` are included in their shiny equivalent and not anymore displayed as autonomous.
+* The subfunctions `d_exp_hts`, `d_inventory`, `d_station`,`d_sensor`, `h_tstep`, `h_month` are included in their shiny equivalent and not anymore displayed as autonomous.
 * The subfunctions `p_line`, `p_bar` and `z_set` are included in the calling functions and not anymore displayed as autonomous.
 
 ### new function

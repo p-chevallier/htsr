@@ -179,11 +179,9 @@ Infos on their uses are detailed in the on-line help or using in the console the
 
 * `ds_inventory()`, makes the inventory of a htsr sqlite data base.
 
-* `ds_sensor()`, creates, modifies or removes a sensor. The second is a Shiny interface of 
-`d_sensor`
+* `ds_sensor()`, creates, modifies or removes a sensor.
 
-* `d_station(fsq, op = "C", sta = NA, name_st = NA, name_fld = NA, value_fld = NA, bku = TRUE)`, or `ds_station()`, creates, modifies or removes a station. The second is a Shiny interface of 
-`d_station`
+* `ds_station()`, creates, modifies or removes a station. 
 
 * `d_table(fsq, table, op = "C", bku = TRUE)` creates or removes a table
 
