@@ -13,7 +13,6 @@
 #' If op is Create or Modify the following fields can be completed optionnaly: Country,
 #' Zone, Sub-zone, Large basin, Basin, Small basin, River, Longitude, Latitude,
 #' Altitude, Basin area, Manager.
-#' }
 #'
 #' If op is Modify, station type and station id cannot be modified. The sensors and
 #' data corresponding to the station are conserved.
