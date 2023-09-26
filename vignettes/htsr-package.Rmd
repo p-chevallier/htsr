@@ -195,8 +195,6 @@ Infos on their uses are detailed in the on-line help or using in the console the
 
 * `d_rem_hts(fsq, table, sta, sen, start = NA, end = NA)`, removes a htsr record from a data base
 
-* `d_wind(fsq, sta = NA, swd = NA, swv = NA)`, creates a wind table
-
 ### Conversion
 
 * `d_convert_hydraccess(fsq, db.hydraccess)`,  converts a full Hydraccess database into a new htsr sqlite database. **NB:** Only works in Windows environment with a 32b R session.
@@ -293,7 +291,7 @@ an interval longer than 4 years.
 
 * `p_scatter(files, intercept.zero = FALSE, remove.zero = FALSE, lg.axis = c(NA, NA),title = "Title")`, plots a scatter plot of 2 or more time-series
 
-* `p_wind(data_wind, ws.int = 0.5, angle = 45, grid.line = 10, type = "default",  breaks = 5, offset = 5, paddle = FALSE)`, plots wind rose
+* `p_wind(fsq, sta, swd, swv, ws.int = 0.5, angle = 45, grid.line = 10, type = "default",  breaks = 5, offset = 5, paddle = FALSE)`, plots wind rose
 
 ## Weather functions (prefix `w_`)
 

@@ -10,13 +10,15 @@
 ### changes
 * `ds_inventory`: The inventory can be stored in xlsx ou csv files.
 * `hs_tstep`: offers new options, which was previously included in `h_month`.
-* Changes were made in `ds_exp_hts`, `ps_plothts`, `d_wind` and `h_wl_di` in order to include the subfunctions `p_line`, `p_bar` and `z_set`. 
+* Changes were made in `ds_exp_hts`, `ps_plothts` and `h_wl_di` in order to include the subfunctions `p_line`, `p_bar` and `z_set`.
+* `p_wind` includes `d_wind` as a subfunction. 
 
 ### bug fixed
 * 
 
 ### removed functions
 * `h_etp`, which duplicated `w_etp`
+* `d_wind`, now a subfunction of `p_wind`
 
 ### bug suspected
 * `f_substitute`: It seems that in few cases it doesn't work correctly. But the error trigger isn't clearly identified. If somebody encounters this issue, please document it and contact the author.
