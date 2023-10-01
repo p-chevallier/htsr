@@ -39,9 +39,10 @@ p_wind <- function(fsq, sta, swd, swv, ws.int=0.5, angle=45, grid.line=10,
 
 		requireNamespace("openair", quietly = TRUE)
 
+
 		# function d_exp_hts
 
-		d_exp_hts <- function(fsq, sta,sen){
+		d_exp_hts <- function(fsq, sta,sen,rtime=FALSE,dstart=NA,dend=NA, rplot=FALSE){
 
 			# fonction u_statnom
 			u_statnom <- function(fsq,sta){
@@ -97,29 +98,29 @@ p_wind <- function(fsq, sta, swd, swv, ws.int=0.5, angle=45, grid.line=10,
 			date_start <- as_datetime(min(z$Date))
 			date_end <- as_datetime(max(z$Date))
 
-			# if(rtime) {
-			# 	if(is.na(dstart)) dstart <-date_start
-			# 	if(is.na(dend)) dend <- date_end
-			# 	# z <- window (z, start = dstart, end = dend)
-			# 	z <- filter(z, Date > dstart)
-			# 	z <- filter(z, Date <= dend)
-			# }
+			if(rtime) {
+				if(is.na(dstart)) dstart <-date_start
+				if(is.na(dend)) dend <- date_end
+				z <- filter(z, Date > dstart)
+				z <- filter(z, Date <= dend)
+			}
 
 			nomfic <- paste (dirname(fsq),"/",sen,"_",sta,".hts",sep="")
 			tstab <- mutate(z, Station = as.factor(sta), Sensor = as.factor(sen))
 			save(tstab, file=nomfic)
 
 			# plot graphe
-			# if(rplot){
-			# 	z_set(file.names = nomfic, plot.label = sen, title = sta)
-			# 	if (table=="PR") p <- p_bar() else p <- p_line()
-			# 	show(p)
-			# }
+			if(rplot){
+				z_set(file.names = nomfic, plot.label = sen, title = sta)
+				if (table=="PR") p <- p_bar() else p <- p_line()
+				show(p)
+			}
 
 			# sortie
 			write(file="",paste("File",nomfic,"extracted !"))
 			return (tstab)
 		}
+
 
 
 		#extraction
