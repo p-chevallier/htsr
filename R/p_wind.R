@@ -111,9 +111,9 @@ p_wind <- function(fsq, sta, swd, swv, ws.int=0.5, angle=45, grid.line=10,
 
 			# plot graphe
 			if(rplot){
-				z_set(file.names = nomfic, plot.label = sen, title = sta)
-				if (table=="PR") p <- p_bar() else p <- p_line()
-				show(p)
+				# z_set(file.names = nomfic, plot.label = sen, title = sta)
+				# if (table=="PR") p <- p_bar() else p <- p_line()
+				# show(p)
 			}
 
 			# sortie
