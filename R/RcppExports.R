@@ -3,7 +3,7 @@
 
 #' @name u_index
 #' @title Compute an index of community
-#' @author P. Chevallier - April 2023
+#' @author P. Chevallier - Apr - Oct 2023
 #' @param nz length of the concatenated time-series
 #' @param yd initial vector of datetimes (in sec)
 #' @details the function compute an index, which the number of apparition of the same datetime
