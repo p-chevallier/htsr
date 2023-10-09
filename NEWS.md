@@ -12,7 +12,7 @@
 * `hs_tstep`: offers new options, which was previously included in `h_month`.
 * Changes were made in `ds_exp_hts`, `ps_plothts` and `h_wl_di` in order to include the subfunctions `p_line`, `p_bar` and `z_set`.
 * `p_wind` includes `d_wind` as a subfunction.
-* `u_index`: a progress indicator is added.
+* `u_index` and `_u_timestep`: a progress indicator is added for both C++ functions.
 
 ### bug fixed
 * 

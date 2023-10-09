@@ -17,7 +17,7 @@ u_index <- function(nz, zd) {
 
 #' @name u_timestep
 #' @title Compute values in a time-series with a fixed timestep
-#' @author P. Chevallier - June 2023
+#' @author P. Chevallier - June / Oct 2023
 #' @param te time end (in sec)
 #' @param yd initial vector of datetimes (in sec)
 #' @param yv initial vector of values
