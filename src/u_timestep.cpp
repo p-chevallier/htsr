@@ -1,3 +1,8 @@
+#include <chrono>
+#include <thread>
+#include <Rcpp.h>
+using namespace Rcpp;
+
 //' @name u_timestep
 //' @title Compute values in a time-series with a fixed timestep
 //' @author P. Chevallier - June / Oct 2023
@@ -9,14 +14,10 @@
 //' @details iop = 1 for sum; 0 for mean; -2 for min and +2 for max
 //' @return vector of values with fixed timestep
 
-#include <chrono>
-#include <thread>
-#include <Rcpp.h>
-using namespace Rcpp;
-
+//[[Rcpp::depends(Rcpp)]]
 // [[Rcpp::export]]
 NumericVector u_timestep (int te, IntegerVector yd, NumericVector yv, int tst, int iop) {
-	std::cout.precision(3);
+	Rcout.precision(2);
   int m = yd.size();
   int n = te/(tst*60);
 
@@ -45,12 +46,12 @@ NumericVector u_timestep (int te, IntegerVector yd, NumericVector yv, int tst, i
     }
 
     if(k == n - 1) {
-    	std::cout << "100 %" << std::endl;
+    	Rcout << "100 %" << std::endl;
     } else if(k % 100 == 0) {
-    	std::cout << "                 ";
-    	std::cout << "\r";
-    	std::cout << static_cast<double>(k+1) / static_cast<double>(n) * 100.0 << "%";
-    	std::cout << "\r";
+    	Rcout << "                 ";
+    	Rcout << "\r";
+    	Rcout << static_cast<double>(k+1) / static_cast<double>(n) * 100.0 << "%";
+    	Rcout << "\r";
     }
 
   }

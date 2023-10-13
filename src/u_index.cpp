@@ -1,4 +1,8 @@
-//---------------------------------
+#include <chrono>
+#include <thread>
+#include <Rcpp.h>
+using namespace Rcpp;
+
 //' @name u_index
 //' @title Compute an index of community
 //' @author P. Chevallier - Apr - Oct 2023
@@ -8,18 +12,15 @@
 //' in a time-series
 //' @return vector of indexes
 
-#include <chrono>
-#include <thread>
-#include <Rcpp.h>
-using namespace Rcpp;
-
+// [[Rcpp::depends(Rcpp)]]
 // [[Rcpp::export]]
 IntegerVector u_index(int nz, IntegerVector zd) {
-  std::cout.precision(3);
+  Rcout.precision(2);
   IntegerVector ze = zd;
   IntegerVector zi(nz);
 
-  std::cout << "Extracting common times...\n";
+  Rcout << "Extracting common times...\n";
+
   for(int i=0; i<nz; ++i) {
 
 		for (int j = 0; j < nz; ++j) {
@@ -27,12 +28,12 @@ IntegerVector u_index(int nz, IntegerVector zd) {
     }
 
     if(i == nz - 1) {
-      std::cout << "100 %" << std::endl;
+      Rcout << "100 %" << std::endl;
     } else if(i % 100 == 0) {
-    	std::cout << "                 ";
-    	std::cout << "\r";
-    	std::cout << static_cast<double>(i+1) / static_cast<double>(nz) * 100.0 << "%";
-      std::cout << "\r";
+      Rcout << "                 ";
+    	Rcout << "\r";
+    	Rcout << static_cast<double>(i+1) / static_cast<double>(nz) * 100.0 << "%";
+    	Rcout << "\r";
     }
   }
   return zi;
