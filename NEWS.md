@@ -1,4 +1,25 @@
-## version 2.1.2 (development version)
+## version 2.1.3 (dev version)
+
+### general
+*  
+
+### new function
+* 
+
+### changes
+*  
+
+### bug fixed
+* 
+
+### removed functions
+*  
+
+### bug suspected
+* `f_substitute`: It seems that in few cases it doesn't work correctly. But the error trigger isn't clearly identified. If somebody encounters this issue, please document it and contact the author.
+
+-------
+## version 2.1.2
 
 ### general
 * The subfunctions `d_exp_hts`, `d_inventory`, `d_station`,`d_sensor`, `h_tstep`, `h_month` are included in their shiny equivalent and not anymore displayed as autonomous.
