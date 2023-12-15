@@ -7,7 +7,9 @@
 * Two new functions added `d_convert_meteofrance_d` and `d_convert_meteofrance_d` for converting csv files wit observed station data from Meteo France, daily and hourly.
 
 ### changes
-*  
+* Small display changes in the ds_ shiny functions. 
+* `p_gaps`: Integration of f_inventory function in order to compute the .gap files
+
 
 ### bug fixed
 * 

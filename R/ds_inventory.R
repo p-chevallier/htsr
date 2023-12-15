@@ -34,7 +34,7 @@ ds_inventory <- function (){
 
 		sidebarLayout(
 			sidebarPanel(width = 5,
-									 shinyFilesButton("file", "File select", "Please select a sqlite data base",
+									 shinyFilesButton("file", "Select database", "Please select a sqlite data base",
 									 								 multiple = FALSE, viewtype = "detail", class="btn btn-primary"),
 									 br(), br(),
 									 div("Station_id blank: all stations are displayed"),
