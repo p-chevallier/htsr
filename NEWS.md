@@ -4,7 +4,7 @@
 *  
 
 ### new function
-* Two new functions added: `d_convert_meteofrance_d` and `d_convert_meteofrance_d` for converting csv files with observed station data from Meteo France, daily and hourly.
+* Two new functions added: `d_convert_meteofrance_d` and `d_convert_meteofrance_h` for converting csv files with observed station data from Meteo France, daily and hourly.
 * Two new faster functions replace `ds_inventory`: one for the inventory of the stations in a data base `ds_inventory_station`, the other for the inventory of the sensors of a selected station `ds_inventory_sensor`.
 
 ### changes

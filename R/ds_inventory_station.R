@@ -86,6 +86,7 @@ ds_inventory_station <- function (){
 				xxt <-dbGetQuery(conn, selection)
 				dbDisconnect(conn)
 				a <- select (xxt, Type_Station, Id_Station, Nom, Latitude, Longitude, Altitude)
+				a <- arrange(a, Id_Station)
 
 				if(!(is.na(form.out))) {
 					nfse <- tools::file_path_sans_ext(fsq)
