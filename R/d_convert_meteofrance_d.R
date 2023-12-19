@@ -43,7 +43,7 @@
 				else {
 					for (i in 1:length(name_fld)){
 						if(!(name_fld[i] %in% c(
-							"Ordre",  "Id_Secondaire", "Id_Tertiaire", "Type_Meteo",
+							"Ordre", "Id_Secondaire", "Id_Tertiaire", "Type_Meteo",
 							"Nom", "Pays", "Zone", "SousZone", "GrandBassin", "Bassin", "PetitBassin",
 							"Riviere", "Gestionnaire", "Critere_Texte", "Nom_Observateur", "Adresse",
 							"Commentaire", "District", "Localite","Latitude", "Longitude", "Altitude",
@@ -352,10 +352,14 @@
 
 		requireNamespace("RSQLite", quietly = TRUE)
 
-		NUM_POSTE <- NOM_USUEL<- LAT<-LON<-ALTI<-AAAAMMJJ<-RR<-TN<-TX<- NULL
-		TM<-TNTXM<-FFM <-FF2M<-FXY<-DXY<-FXI<-DXI<-DXI2 <- NULL
-		QRR<-QTN<-QTX<-QTM<-QTNTXM<-QFFM<-QFF2M<-QFXY<-QDXY<-QFXI<- QDXI <- QDXI2 <- NULL
-		FXI2 <- QFXI2 <- QFXI2S  <- NULL
+		"NUM_POSTE" <- "NOM_USUEL" <- "LAT" <- "LON" <- "ALTI" <- "AAAAMMJJ" <- "RR" <- "QRR" <- "TN" <- "QTN" <- "HTN" <-
+		"QHTN" <- "TX" <- "QTX" <- "HTX" <- "QHTX" <- "TM" <- "QTM" <- "TNTXM" <- "QTNTXM" <- "TAMPLI" <- "QTAMPLI" <-
+		"TNSOL" <- "QTNSOL" <- "TN50" <- "QTN50" <- "DG" <- "QDG" <- "FFM" <- "QFFM" <- "FF2M" <- "QFF2M" <- "FXY" <-
+		"QFXY" <- "DXY" <- "QDXY" <- "HXY" <- "QHXY" <- "FXI" <- "QFXI" <- "DXI" <- "QDXI" <- "HXI" <- "QHXI" <-
+		"FXI2" <- "QFXI2" <- "DXI2" <- "QDXI2" <- "HXI2" <- "QHXI2" <- "FXI3S" <- "QFXI3S" <- "DXI3S" <- "QDXI3S" <- "HXI3S" <-
+		"QHXI3S" <- NULL
+
+		"QFXI2S" <- NULL
 
 
 		# creation base de données
@@ -365,56 +369,21 @@
 		# lecture du fichier meteo et selection des variables
 		x <- read_delim(file = fmeteo, delim = ";", col_names = TRUE, col_types = cols(.default = col_character()))
 		xcol <- colnames(x)
-
-		if (!("RR" %in%xcol)) stop ("Verify the input file!")
-
-		# #resolution bug QFXI2/QFXI2S
-		if("QFXI2S" %in% xcol) {
-			QFXI2 <- x$QFXI2S
-			x <- mutate(x, QFXI2)
-		}
-
-		x <- select(x, NUM_POSTE, NOM_USUEL, LAT, LON, ALTI, AAAAMMJJ,
-								RR, TN, TX, TM, TNTXM, FFM, FF2M, FXY, DXY, FXI, DXI, FXI2, DXI2,
-								QRR, QTN, QTX, QTM, QTNTXM, QFFM, QFF2M, QFXY, QDXY, QFXI, QDXI, QFXI2, QDXI2)
+		if("QFXI2S" %in% xcol) x <- rename(x, QFXI2 = QFXI2S) #resolution bug QFXI2/QFXI2S
+		if (!("RR" %in%xcol)) stop ("Verify the input file!") #cas des autres variables
 		xcol <- colnames(x)
 
+		# station et temps
 		x$NUM_POSTE = parse_factor(x$NUM_POSTE)
 		x$NOM_USUEL = parse_character(x$NOM_USUEL)
 		x$LAT = parse_double(x$LAT)
 		x$LON = parse_double(x$LON)
 		x$ALTI = parse_double(x$ALTI)
-		x$RR = parse_double(x$RR)
-		x$TN = parse_double(x$TN)
-		x$TX = parse_double(x$TX)
-		x$TM = parse_double(x$TM)
-		x$TNTXM = parse_double(x$TNTXM)
-		x$FFM = parse_double(x$FFM)
-		x$FF2M = parse_double(x$FF2M)
-		x$FXY = parse_double(x$FXY)
-		x$DXY = parse_double(x$DXY)
-		x$FXI= parse_double(x$FXI)
-		x$DXI = parse_double(x$DXI)
-		x$FXI2= parse_double(x$FXI2)
-		x$DXI2 = parse_double(x$DXI2)
-		x$QRR = parse_integer(x$QRR)
-		x$QTN = parse_integer(x$QTN)
-		x$QTX = parse_integer(x$QTX)
-		x$QTM = parse_integer(x$QTM)
-		x$QTNTXM = parse_integer(x$QTNTXM)
-		x$QFFM = parse_integer(x$QFFM)
-		x$QFF2M = parse_integer(x$QFF2M)
-		x$QFXY = parse_integer(x$QFXY)
-		x$QDXY = parse_integer(x$QDXY)
-		x$QFXI= parse_integer(x$QFXI)
-		x$QDXI = parse_integer(x$QDXI)
-		x$QFXI2= parse_integer(x$QFXI2)
-		x$QDXI2 = parse_integer(x$QDXI2)
-
-		# traitement datetime
 		x$AAAAMMJJ <- as_datetime(ymd(x$AAAAMMJJ)) + (18 * 3600)
 
-
+		# variable
+		x <- mutate_at(x, c(7,9,11,13,15,17,19,21,23,25,27,29,31,33,35,37,39,
+												41,43,45,47,49,51,53,55), as.numeric)
 
 		# identification stations
 		cod_sta <- levels(x$NUM_POSTE)
@@ -448,12 +417,17 @@
 		dbDisconnect(conn)
 
 		# autres cas
-		l <- as.vector(c("TN", "TX", "TM", "TNTXM", "FFM", "FF2M", "FXY", "DXY", "FXI", "DXI", "FXI2", "DXI2"))
-		lq <- as.vector(c("QTN", "QTX", "QTM", "QTNTXM", "QFFM", "QFF2M", "QFXY", "QDXY", "QFXI", "QDXI", "QFXI2", "QDXI2"))
+		l <- as.vector(c("TN","HTN","TX","HTX","TM","TNTXM","TAMPLI",
+										 "TNSOL","TN50","DG","FFM","FF2M","FXY",
+										 "DXY","HXY","FXI","DXI","HXI",
+										 "FXI2","DXI2","HXI2","FXI3S","DXI3S","HXI3S"))
+
 		for (i in 1:length(cod_sta)) map(l, function(.x) d_sensor(fsq, op = "C", sta = cod_sta[i], sen=.x,
 																 table = "WE", bku = FALSE))
 		for (j in 1:length (l)) {
-			xx <- transmute(x,Type_Station="M",Id_Station=NUM_POSTE, Capteur=l[j], Date = AAAAMMJJ, x[,7+j], Tabl = "WE" ,Qualite = lq[j])
+			xval <- x[,7+j*2]
+			xqval <- x[,8+j*2]
+			xx <- transmute(x,Type_Station="M",Id_Station=NUM_POSTE, Capteur=l[j], Date = AAAAMMJJ, xval, Tabl = "WE" , xqval)
 			colnames(xx) <- c("Type_Station", "Id_Station", "Capteur", "Date", "Valeur", "Tabl" ,"Qualite")
 			conn <- dbConnect(SQLite(),fsq)
 			dbWriteTable(conn, name="WE", xx, append = TRUE)

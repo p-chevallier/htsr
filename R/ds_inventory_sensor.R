@@ -44,6 +44,7 @@ ds_inventory_sensor <- function (){
 			mainPanel(width =7,
 								textOutput("fsq"),
 								br(),
+								textOutput("utc"),
 								textOutput("nasta"),
 								textOutput("nosta"),
 								textOutput("nosen"),
@@ -93,6 +94,9 @@ ds_inventory_sensor <- function (){
 				selection <- paste ("SELECT * FROM WE WHERE Id_Station = ", sta)
 				xxw <-tibble(dbGetQuery(conn, selection))
 				dbDisconnect(conn)
+
+				# xxp$Date <- as_date(xxp$Date)
+				# xxw$Date <- as_date(xxw$Date)
 
 				k <- 0
 				# cas des precipitations
@@ -162,6 +166,8 @@ ds_inventory_sensor <- function (){
 			rep$Date_init <- as.character(as_datetime(rep$Date_init, tz= "CET"))
 			rep$Date_end <- as.character(as_datetime(rep$Date_end, tz= "CET"))
 			rep$Records <- as.integer(rep$Records)
+
+			output$utc <- renderText("Dates are given in UTC time zone.")
 
 			output$stationtable <- renderTable ({rep})
 		})
