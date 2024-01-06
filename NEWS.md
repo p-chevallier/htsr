@@ -9,17 +9,14 @@
 
 ### changes
 * ds_ shiny functions: display changes in the headers. 
-* `p_gaps`: Integration of f_inventory function in order to compute the .gap files
+* `p_gaps`: integration of f_inventory function in order to compute the .gap files.
 
 
 ### bug fixed
-* 
+* `d_imp_hts`: bug fixed.
 
 ### removed functions
-* `ds_inventory` is replaced (see above)
-
-### bug suspected
-* `f_substitute`: It seems that in few cases it doesn't work correctly. But the error trigger isn't clearly identified. If somebody encounters this issue, please document it and contact the author.
+* `ds_inventory` is replaced (see above).
 
 -------
 ## version 2.1.2
