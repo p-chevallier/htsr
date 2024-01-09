@@ -6,7 +6,7 @@ output:
   pdf_document: default
 ---
 ## Test environments
-* local: Manjaro Linux "Uranos 23.0.3", R "4.3.1", Kernel "6.5.5-1"
+* local: Manjaro Linux "Vulcan 23.1.2", R "4.3.2", Kernel "6.6.8-2"
 * win: tested with win-builder.r-project.org using the r-devel version
 * github: R-CMD-check]
 
@@ -18,8 +18,7 @@ output:
   Compilation used the following non-portable flag(s):
     ‘-Werror=format-security’ ‘-Wformat’ ‘-Wp,-D_FORTIFY_SOURCE=2’
     ‘-Wp,-D_GLIBCXX_ASSERTIONS’ ‘-march=x86-64’
-    
-Reply: according to discussions on stackoverflow, it can be ignored.
+According to discussions on https://stackoverflow.com/, it can be ignored.
 
 ### Comment
 * no comment

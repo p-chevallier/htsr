@@ -1,7 +1,7 @@
-## version 2.1.3 (dev version)
+## version 2.1.3
 
 ### general
-*  
+*
 
 ### new function
 * New function added: `d_convert_meteofrance_d` for converting daily csv files of observed station data from Meteo France.
@@ -14,6 +14,8 @@
 
 ### bug fixed
 * `d_imp_hts`: bug fixed.
+* `hs_tstep`: bug fixed.
+
 
 ### removed functions
 * `ds_inventory` is replaced (see above).
