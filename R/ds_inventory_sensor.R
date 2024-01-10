@@ -1,6 +1,6 @@
 #' @title Inventory of a station sensors of an htsr data base
 #'
-#' @author P. Chevallier  - Dec 2023
+#' @author P. Chevallier  - Jan 2024
 #'
 #' @description The function display a web page in order to produce an inventory of the
 #' sensors for a selected station in an htsr data base.
@@ -86,17 +86,21 @@ ds_inventory_sensor <- function (){
 
 				requireNamespace("RSQLite", quietly = TRUE)
 				Capteur <- NULL
+				tlist <- c("WE","WL","DI","QU")
 
 				# lecture de la base de données
 				conn <- dbConnect(SQLite(),fsq)
-				selection <- paste ("SELECT * FROM PR WHERE Id_Station = ", sta)
+				sta1 <-paste0("'",sta,"'")
+				selection <- paste ("SELECT * FROM PR WHERE Id_Station = ", sta1)
 				xxp <-tibble(dbGetQuery(conn, selection))
-				selection <- paste ("SELECT * FROM WE WHERE Id_Station = ", sta)
-				xxw <-tibble(dbGetQuery(conn, selection))
-				dbDisconnect(conn)
 
-				# xxp$Date <- as_date(xxp$Date)
-				# xxw$Date <- as_date(xxw$Date)
+				for (i in 1:4){
+					ti <- tlist[i]
+					selection <- paste ("SELECT * FROM", ti, "WHERE Id_Station = ", sta1)
+					if (i==1) xxx <-tibble(dbGetQuery(conn, selection))
+					else xxx <- bind_rows(xxx, tibble(dbGetQuery(conn, selection)))
+				}
+				dbDisconnect(conn)
 
 				k <- 0
 				# cas des precipitations
@@ -119,14 +123,14 @@ ds_inventory_sensor <- function (){
 						}
 					}
 
-				# cas des capteurs meteo
-				xxw$Capteur <- as.factor(xxw$Capteur)
-				list_capt <- levels(xxw$Capteur)
+				# cas des autres capteurs
+				xxx$Capteur <- as.factor(xxx$Capteur)
+				list_capt <- levels(xxx$Capteur)
 				nrec <- datedeb <- datefin <- vector(mode="numeric", length = length(list_capt))
 				if (length(list_capt) !=0)
 					for (i in 1:length(list_capt)){
 						k <- k+1
-						xx <- filter(xxw, Capteur == list_capt[i])
+						xx <- filter(xxx, Capteur == list_capt[i])
 						nrec[i] <- nrow(xx)
 						datedeb [i] <- min(xx$Date)
 						datefin [i] <- max(xx$Date)
@@ -138,6 +142,12 @@ ds_inventory_sensor <- function (){
 							a <- bind_rows(a, b)
 						}
 					}
+
+
+
+
+
+
 				a$Date_init <- as_datetime(a$Date_init, tz= "CET")
 				a$Date_end <- as_datetime(a$Date_end, tz= "CET")
 
