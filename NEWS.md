@@ -1,4 +1,23 @@
-## version 2.1.3
+## version 2.1.4 (dev)
+
+### general
+*
+
+### new function
+* 
+
+### changes
+* 
+
+### bug fixed
+* 
+
+### removed functions
+* 
+
+-------
+
+## version 2.1.3 (9 January 2024)
 
 ### general
 *
@@ -21,7 +40,8 @@
 * `ds_inventory` is replaced (see above).
 
 -------
-## version 2.1.2
+
+## version 2.1.2 (13 October 2023)
 
 ### general
 * The subfunctions `d_exp_hts`, `d_inventory`, `d_station`,`d_sensor`, `h_tstep`, `h_month` are included in their shiny equivalent and not anymore displayed as autonomous.
