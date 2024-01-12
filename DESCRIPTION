@@ -14,7 +14,7 @@ Imports:
 Suggests:
     knitr, rmarkdown, RODBC, openair, editData, terra, directlabels
 Encoding: UTF-8
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.0
 VignetteBuilder: knitr
 LinkingTo: Rcpp
 URL: https://github.com/p-chevallier/htsr
