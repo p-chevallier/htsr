@@ -7,10 +7,11 @@
 * 
 
 ### changes
-* 
+* `ds_convert_meteofrance`: light adaptation in the sensor naming.
 
 ### bug fixed
 * `ds_inventory_sensor`: bug fixed (the inventory was not taking into account some tables).
+* `hs_tstep`: bug fixed (no limit for the number of time step iteration).
 
 ### removed functions
 * 
