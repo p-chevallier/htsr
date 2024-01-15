@@ -4,7 +4,7 @@
 *
 
 ### new function
-* 
+* `h_adjust`: adjustment of a time-series to a statistical model. For instance only a linear model is allowed.
 
 ### changes
 * `ds_convert_meteofrance`: light adaptation in the sensor naming.
