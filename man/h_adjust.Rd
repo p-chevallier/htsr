@@ -9,7 +9,7 @@ h_adjust(file, time_unit = "year")
 \arguments{
 \item{file}{File to proceed}
 
-\item{time_unit}{to be chosen in: "year", "month", "day"}
+\item{time_unit}{to be chosen in: "100y", "year", "month", "day"}
 }
 \description{
 Adjust a time series to a statistical model

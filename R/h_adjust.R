@@ -8,7 +8,7 @@
 #' "year" corresponds to an average year of 365.25 days and month to an average month of 30,4575 days.
 #'
 #' @param file File to proceed
-#' @param time_unit to be chosen in: "year", "month", "day"
+#' @param time_unit to be chosen in: "100y", "year", "month", "day"
 #'
 #'
 

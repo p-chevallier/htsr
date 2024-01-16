@@ -6,7 +6,7 @@ output:
   pdf_document: default
 ---
 ## Test environments
-* local: Manjaro Linux "Vulcan 23.1.2", R "4.3.2", Kernel "6.6.8-2"
+* local: Manjaro Linux "Vulcan 23.1.2", R "4.3.2", Kernel "6.7.0-0"
 * win: tested with win-builder.r-project.org using the r-devel version
 * github: R-CMD-check]
 
@@ -21,7 +21,8 @@ output:
 According to discussions on https://stackoverflow.com/, it can be ignored.
 
 ### Comment
-* no comment
+* The delay between 2 releases has been shortened due to the necessity of fixing two
+critic bugs.
 
 ### bugs fixed
 * see `NEWS.md`

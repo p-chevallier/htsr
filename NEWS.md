@@ -1,4 +1,4 @@
-## version 2.1.4 (dev)
+## version 2.1.4
 
 ### general
 *
