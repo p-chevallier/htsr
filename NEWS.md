@@ -4,7 +4,7 @@
 *
 
 ### new function
-* 
+* New function added: `d_convert_meteofrance_h` for converting hourly csv files of observed station data from Meteo France.
 
 ### changes
 * 
