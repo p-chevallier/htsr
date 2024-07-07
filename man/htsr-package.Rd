@@ -4,7 +4,7 @@
 \name{htsr-package}
 \alias{htsr}
 \alias{htsr-package}
-\title{htsr: Hydro-Meteorology Time-Series (dev)}
+\title{htsr: Hydro-Meteorology Time-Series}
 \description{
 Functions for the management and treatment of hydrology and meteorology time-series stored in a 'Sqlite' data base.
 }

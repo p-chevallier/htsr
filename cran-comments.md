@@ -6,7 +6,7 @@ output:
   pdf_document: default
 ---
 ## Test environments
-* local: Manjaro Linux "Vulcan 23.1.2", R "4.3.2", Kernel "6.7.0-0"
+* local: Manjaro Linux "Wynsdey 24.0.3", R "4.4.1", Kernel "6.9.5-1"
 * win: tested with win-builder.r-project.org using the r-devel version
 * github: R-CMD-check]
 
