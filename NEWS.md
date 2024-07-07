@@ -1,16 +1,17 @@
-## version 2.1.5 (dev)
+## version 2.1.5 (7 July 2024)
 
 ### general
 *
 
 ### new function
-* New function added: `d_convert_meteofrance_h` for converting hourly csv files of observed station data from Meteo France.
+* `d_convert_meteofrance_h` added for converting hourly csv files of observed station data from Meteo France.
+* `d_convert_hubeau` added for converting hydrological station data from data.eau.france.
 
 ### changes
 * 
 
 ### bug fixed
-* 
+* The time zone (Europe/Paris) has been fixed in the function `d_convert_weewx`.
 
 ### removed functions
 * 

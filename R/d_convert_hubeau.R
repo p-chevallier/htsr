@@ -2,14 +2,18 @@
 #'
 #' @author P. Chevallier - jul 2024
 #'
-#' @description A REPRENDRE Convert a Meteo-France csv daily data file into a htsr sqlite base. It regards
-#' the "basic" data file, which includes precipitation, temperature and wind data. For other
-#' variables the function d_convert_meteofrance_d1 shall be used with the corresponding csv file.
-#' The csv file shall be downloaded from https://meteo.data.gouv.fr/
-#' The name of the created sqlite file is the same as the csv file with an extension .sqlite.
+#' @description Convert a Hubeau  hydrological file into a htsr sqlite base. It regards
+#' the "basic" data file, which includes water level and discharge data. .
 #'
 #' @details
+#' The data base is build from selected stations in the "stations.tar" file available on the data.eau.france web site.
+#' This file must be first downloaded and extracted in the folder hubeau.dir. For the extraction the R
+#' function untar() can be used.
+#' Secondly Within the hubeau.dir, the file stations/stations.csv give the full list of the available stations. One or more station ids
+#' must be chosen and included in the station.id list parameter.
 #'
+#' @details
+#' The units of water level data is cm and of discharge data is m3/s.
 #'
 #' @param hubeau.dir Full path of the hubeau folder (character)
 #' @param station.id Id list of the stations to convert (character)
@@ -355,9 +359,9 @@
 
 		#---------------------------
 
-		library(tidyverse)
-		library(htsr)
-		library(RSQLite)
+		# library(tidyverse)
+		# library(htsr)
+		# library(RSQLite)
 
 		requireNamespace("RSQLite", quietly = TRUE)
 
@@ -365,6 +369,8 @@
 		# fsq <- paste0(station.id,".sqlite")
 		fsq <- paste0(hubeau.dir, "/",fsqname, ".sqlite")
 		d_create(fsq)
+
+		cdentite <- dtmesure <- hauteur <- qualh <- debit <- qualq <- NULL
 
 		# creation stations
 		x <- read_delim(file = paste0(hubeau.dir,"/stations/stations.csv"), delim = ";", col_names = TRUE, col_types = cols(.default = col_character()))
