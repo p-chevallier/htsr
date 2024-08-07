@@ -6,7 +6,7 @@ output:
   pdf_document: default
 ---
 ## Test environments
-* local: Manjaro Linux "Wynsdey 24.0.3", R "4.4.1", Kernel "6.9.5-1"
+* local: Manjaro Linux "Wynsdey 24.0.5", R "4.4.1", Kernel "6.10.0-3"
 * win: tested with win-builder.r-project.org using the r-devel version
 * github: R-CMD-check]
 
@@ -16,8 +16,10 @@ output:
 * 1 NOTEs:
 ❯ checking compilation flags used ... NOTE
   Compilation used the following non-portable flag(s):
-    ‘-Werror=format-security’ ‘-Wformat’ ‘-Wp,-D_FORTIFY_SOURCE=2’
+Compilation used the following non-portable flag(s):
+    ‘-Werror=format-security’ ‘-Wformat’ ‘-Wp,-D_FORTIFY_SOURCE=3’
     ‘-Wp,-D_GLIBCXX_ASSERTIONS’ ‘-march=x86-64’
+    ‘-mno-omit-leaf-frame-pointer’
 According to discussions on https://stackoverflow.com/, it can be ignored.
 
 ### Comment

@@ -1,4 +1,4 @@
-## version 2.1.6 (dev)
+## version 2.1.6
 
 ### general
 *
@@ -10,7 +10,8 @@
 * 
 
 ### bug fixed
-* 
+* bug fixed in `d_convert_hubeau`.
+* risk corrected of possible mask with dplyr::filter 
 
 ### removed functions
 * 
