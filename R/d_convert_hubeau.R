@@ -409,14 +409,14 @@
 		x$debit <- as.numeric(x$debit) / 1000
 
 		# cas hauteur
-		for (i in 1:length(slst)) d_sensor(fsq, op = "C", sta = slst[i], sen = "IH", table = "WL", bku = FALSE)
+#		for (i in 1:length(slst)) d_sensor(fsq, op = "C", sta = slst[i], sen = "IH", table = "WL", bku = FALSE)
 		xx <- transmute(x,Type_Station="H",Id_Station=cdentite, Capteur="IH", Date = dtmesure, Valeur = hauteur, Tabl = "WL", Qualite = qualh)
 		conn <- dbConnect(SQLite(),fsq)
 		dbWriteTable(conn, name="WL", xx, overwrite = TRUE)
 		dbDisconnect(conn)
 
 		# cas debit
-		for (i in 1:length(slst)) d_sensor(fsq, op = "C", sta = slst[i], sen = "IQ", table = "DI", bku = FALSE)
+#		for (i in 1:length(slst)) d_sensor(fsq, op = "C", sta = slst[i], sen = "IQ", table = "DI", bku = FALSE)
 		xx <- transmute(x,Type_Station="H",Id_Station=cdentite, Capteur="IQ", Date = dtmesure, Valeur = debit, Tabl = "DI", Qualite = qualq)
 		conn <- dbConnect(SQLite(),fsq)
 		dbWriteTable(conn, name="DI", xx, overwrite = TRUE)
