@@ -20,6 +20,7 @@ Compilation used the following non-portable flag(s):
     ‘-Werror=format-security’ ‘-Wformat’ ‘-Wp,-D_FORTIFY_SOURCE=3’
     ‘-Wp,-D_GLIBCXX_ASSERTIONS’ ‘-march=x86-64’
     ‘-mno-omit-leaf-frame-pointer’
+    
 According to discussions on https://stackoverflow.com/, it can be ignored.
 
 ### Comment
