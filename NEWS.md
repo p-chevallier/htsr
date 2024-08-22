@@ -1,4 +1,4 @@
-## version 2.1.6
+## version 2.1.7 dev
 
 ### general
 *
@@ -8,39 +8,34 @@
 
 ### changes
 * 
+
+### bug fixed
+* 
+
+### removed functions
+* 
+
+-------
+## version 2.1.6 (16 August 2024)
 
 ### bug fixed
 * bug fixed in `d_convert_hubeau`.
 * risk corrected of possible mask with dplyr::filter 
 
-### removed functions
-* 
-
 -------
 ## version 2.1.5 (7 July 2024)
 
-### general
-*
 
 ### new function
 * `d_convert_meteofrance_h` added for converting hourly csv files of observed station data from Meteo France.
 * `d_convert_hubeau` added for converting hydrological station data from data.eau.france.
 
-### changes
-* 
-
 ### bug fixed
 * The time zone (Europe/Paris) has been fixed in the function `d_convert_weewx`.
-
-### removed functions
-* 
 
 -------
 
 ## version 2.1.4 (16 January 2024)
-
-### general
-*
 
 ### new function
 * `h_adjust`: adjustment of a time-series to a statistical model. For instance only a linear model is allowed.
@@ -52,15 +47,9 @@
 * `ds_inventory_sensor`: bug fixed (the inventory was not taking into account some tables).
 * `hs_tstep`: bug fixed (no limit for the number of time step iteration).
 
-### removed functions
-* 
-
 -------
 
 ## version 2.1.3 (9 January 2024)
-
-### general
-*
 
 ### new function
 * New function added: `d_convert_meteofrance_d` for converting daily csv files of observed station data from Meteo France.
@@ -87,18 +76,12 @@
 * The subfunctions `d_exp_hts`, `d_inventory`, `d_station`,`d_sensor`, `h_tstep`, `h_month` are included in their shiny equivalent and not anymore displayed as autonomous.
 * The subfunctions `p_line`, `p_bar` and `z_set` are included in the calling functions and not anymore displayed as autonomous.
 
-### new function
-* 
-
 ### changes
 * `ds_inventory`: The inventory can be stored in xlsx ou csv files.
 * `hs_tstep`: offers new options, which was previously included in `h_month`.
 * Changes were made in `ds_exp_hts`, `ps_plothts` and `h_wl_di` in order to include the subfunctions `p_line`, `p_bar` and `z_set`.
 * `p_wind` includes `d_wind` as a subfunction.
 * `u_index` and `_u_timestep`: a progress indicator is added for both C++ functions.
-
-### bug fixed
-* 
 
 ### removed functions
 * `h_etp`, which duplicated `w_etp`
