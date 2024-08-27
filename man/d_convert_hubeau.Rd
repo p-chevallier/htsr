@@ -18,7 +18,8 @@ Convert a Hubeau  hydrological file into a htsr sqlite base. It regards
 the "basic" data file, which includes water level and discharge data. .
 }
 \details{
-The data base is build from selected stations in the "stations.tar" file available on the data.eau.france web site.
+The data base is build from selected stations in the "stations.tar" file available
+on the Eaufrance web site : \url{https://data.ofb.fr/catalogue/data-eaufrance/fre/catalog.search}
 This file must be first downloaded and extracted in the folder hubeau.dir. For the extraction the R
 function untar() can be used.
 Secondly Within the hubeau.dir, the file stations/stations.csv give the full list of the available stations. One or more station ids

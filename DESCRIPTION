@@ -1,7 +1,7 @@
 Package: htsr
 Type: Package
 Title: Hydro-Meteorology Time-Series
-Version: 2.1.7dev
+Version: 2.1.7
 Date: 2024-12-31
 Authors@R: person(given = "Pierre",
                     family = "Chevallier",
