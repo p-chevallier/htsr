@@ -1,28 +1,19 @@
 ## version 2.1.7 dev
 
-### general
-*
-
-### new function
-* 
-
 ### changes
-* 
+* The function `d_convert_hubeau` is renamed `d_convert_eaufrance`.
 
-### bug fixed
-* 
-
-### removed functions
-* 
 
 -------
-## version 2.1.6 (16 August 2024)
+
+## version 2.1.6 (18 August 2024)
 
 ### bug fixed
 * bug fixed in `d_convert_hubeau`.
 * risk corrected of possible mask with dplyr::filter 
 
 -------
+
 ## version 2.1.5 (7 July 2024)
 
 

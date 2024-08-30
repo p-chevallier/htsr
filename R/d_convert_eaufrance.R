@@ -22,7 +22,7 @@
 
 
 # function d_convert_hubeau
-	d_convert_hubeau <- function (hubeau.dir, station.id, fsqname) {
+	d_convert_eaufrance <- function (hubeau.dir, station.id, fsqname) {
 
 		# function d_station
 		d_station <- function(fsq, op = "C", sta, ty_st = NA, name_st=NA,
