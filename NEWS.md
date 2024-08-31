@@ -1,7 +1,7 @@
 ## version 2.1.7 dev
 
 ### changes
-* The function `d_convert_hubeau` is renamed `d_convert_eaufrance`.
+* The function `d_convert_hubeau` is renamed `d_convert_eaufrance`. The help file is improved.
 
 
 -------
