@@ -408,25 +408,22 @@
 				slst <- c(slst, folder)
 				files <-  list.files(folder, pattern = ".", all.files = FALSE, recursive = TRUE, full.names = TRUE)
 				for (j in 1:length(files)) {
-#					if (i==1 && j==1) x <- tibble(read.csv2(gzfile(files[1])))
 					x <- bind_rows (x, read.csv2(gzfile(files[j])))}
 			}
 		}
 		x$dtmesure <- force_tz(ymd_hms(x$dtmesure), tzone = "Europe/Paris")
 		if (is.null(x$hauteur)) x$hauteur = NA
 		if (is.null(x$debit)) x$debit = NA
-		x$hauteur <- as.numeric(x$hauteur)
+		x$hauteur <- as.numeric(x$hauteur) /10
 		x$debit <- as.numeric(x$debit) / 1000
 
 		# cas hauteur
-#		for (i in 1:length(slst)) d_sensor(fsq, op = "C", sta = slst[i], sen = "IH", table = "WL", bku = FALSE)
 		xx <- transmute(x,Type_Station="H",Id_Station=cdentite, Capteur="IH", Date = dtmesure, Valeur = hauteur, Tabl = "WL", Qualite = qualh)
 		conn <- dbConnect(SQLite(),fsq)
 		dbWriteTable(conn, name="WL", xx, overwrite = TRUE)
 		dbDisconnect(conn)
 
 		# cas debit
-#		for (i in 1:length(slst)) d_sensor(fsq, op = "C", sta = slst[i], sen = "IQ", table = "DI", bku = FALSE)
 		xx <- transmute(x,Type_Station="H",Id_Station=cdentite, Capteur="IQ", Date = dtmesure, Valeur = debit, Tabl = "DI", Qualite = qualq)
 		conn <- dbConnect(SQLite(),fsq)
 		dbWriteTable(conn, name="DI", xx, overwrite = TRUE)
